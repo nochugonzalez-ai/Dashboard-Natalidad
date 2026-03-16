@@ -1,0 +1,11 @@
+# Ignorar CUALQUIER archivo de clave JSON
+*.json
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+|
+# Ignorar entornos virtuales (si usas uno)
+.venv
+venv

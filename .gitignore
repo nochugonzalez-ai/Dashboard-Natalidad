@@ -1,0 +1,22 @@
+# --- SEGURIDAD ---
+# Ignorar específicamente tu llave de Google Cloud
+dashboard.json
+*.json
+
+# --- PYTHON ---
+# Ignorar carpetas de entorno virtual y caché
+__pycache__/
+*.pyc
+venv/
+.env
+
+# --- TERRAFORM ---
+# Ignorar archivos de estado de Terraform (contienen info sensible)
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# --- DOCKER ---
+# A veces Docker genera archivos temporales
+.docker/

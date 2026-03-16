@@ -1,0 +1,53 @@
+version: '3.8'
+
+# Definimos los servicios (contenedores)
+services:
+
+  # 1. El Servicio de Base de Datos (TimescaleDB/PostgreSQL)
+  db:
+    image: "timescale/timescaledb:latest-pg14"
+    container_name: postgres_db
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=miproyectoprueba12*
+      - POSTGRES_DB=analytics_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  # 2. El Servicio Colector (Tu script)
+  collector:
+    build: .
+    container_name: collector_service
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=miproyectoprueba12*
+      - POSTGRES_DB=analytics_db
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-key.json
+    volumes:
+      - "D:\\Udemy\\Portafolio\\Tablero\\dashboard.json:/app/gcp-key.json"
+
+  # 3. El Servicio de Visualización (Grafana)
+  grafana:
+    image: "grafana/grafana-oss:latest"
+    container_name: grafana_viz
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+# Definimos los volúmenes globales
+volumes:
+  postgres-data:
+    driver: local
+  grafana-data:
+    driver: local
