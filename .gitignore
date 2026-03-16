@@ -1,5 +1,5 @@
 # --- SEGURIDAD ---
-# Ignorar específicamente tu llave de Google Cloud
+
 dashboard.json
 *.json
 
@@ -11,7 +11,7 @@ venv/
 .env
 
 # --- TERRAFORM ---
-# Ignorar archivos de estado de Terraform (contienen info sensible)
+# Ignorar archivos
 .terraform/
 *.tfstate
 *.tfstate.backup
