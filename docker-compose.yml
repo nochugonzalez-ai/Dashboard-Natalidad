@@ -1,9 +1,9 @@
 version: '3.8'
 
-# Definimos los servicios (contenedores)
+# Definimos los servicios
 services:
 
-  # 1. El Servicio de Base de Datos (TimescaleDB/PostgreSQL)
+  # 1. El Servicio de Base de Datos
   db:
     image: "timescale/timescaledb:latest-pg14"
     container_name: postgres_db
@@ -16,7 +16,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  # 2. El Servicio Colector (Tu script)
+  # 2. El Servicio Colector 
   collector:
     build: .
     container_name: collector_service
@@ -32,7 +32,7 @@ services:
     volumes:
       - "D:\\Udemy\\Portafolio\\Tablero\\dashboard.json:/app/gcp-key.json"
 
-  # 3. El Servicio de Visualización (Grafana)
+  # 3. El Servicio de Visualización 
   grafana:
     image: "grafana/grafana-oss:latest"
     container_name: grafana_viz
@@ -45,7 +45,7 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
 
-# Definimos los volúmenes globales
+# Volúmenes globales
 volumes:
   postgres-data:
     driver: local
